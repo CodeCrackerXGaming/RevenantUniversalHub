@@ -25,7 +25,8 @@ local maxTeleportRetries = 3
 
 --// Found Pet Cache
 local detectedPets = {}
-local webhookSent = true
+local webhookSent = false
+local stopHopping = false
 
 TeleportService.TeleportInitFailed:Connect(function(_, result)
     teleportFails += 1
@@ -146,6 +147,7 @@ end
 
 --// Server Hop Function
 function serverHop()
+    if stopHopping then return end
     task.wait(1.5)
 
     local cursor = nil
