@@ -26,7 +26,6 @@ local maxTeleportRetries = 3
 --// Found Pet Cache
 local detectedPets = {}
 local webhookSent = false
-serverHop()
 
 TeleportService.TeleportInitFailed:Connect(function(_, result)
     teleportFails += 1
