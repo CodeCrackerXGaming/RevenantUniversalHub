@@ -219,7 +219,7 @@ local maxTeleportRetries = 3
 
 --// Found Pet Cache
 local detectedPets = {}
-local webhookSent = true
+local webhookSent = false
 local stopHopping = false
 
 TeleportService.TeleportInitFailed:Connect(function(_, result)
@@ -293,7 +293,7 @@ local function sendWebhook(foundPets, jobId)
             ["fields"] = {
                 { ["name"] = "User", ["value"] = LocalPlayer.Name },
                 { ["name"] = "Found Pet(s)", ["value"] = table.concat(formattedPets, "\n") },
-                { ["name"] = "Server JobId", ["value"] = "game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '".. jobId .."')" },
+                { ["name"] = "Server JobId", ["value"] = ```"game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '".. jobId .."')"``` },
                 { ["name"] = "Time", ["value"] = os.date("%Y-%m-%d %H:%M:%S") }
             },
             ["color"] = 0xFF00FF
