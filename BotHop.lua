@@ -293,7 +293,7 @@ local function sendWebhook(foundPets, jobId)
             ["fields"] = {
                 { ["name"] = "User", ["value"] = LocalPlayer.Name },
                 { ["name"] = "Found Pet(s)", ["value"] = table.concat(formattedPets, "\n") },
-                { ["name"] = "Server JobId", ["value"] = jobId },
+                { ["name"] = "Server JobId", ["value"] = "game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '".. jobId .."')" },
                 { ["name"] = "Time", ["value"] = os.date("%Y-%m-%d %H:%M:%S") }
             },
             ["color"] = 0xFF00FF
