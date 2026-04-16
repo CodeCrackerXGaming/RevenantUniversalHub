@@ -215,7 +215,7 @@ workspace.DescendantAdded:Connect(function(obj)
                     detectedPets[obj.Name] = true
                     addESP(obj)
                     print("🎯 New pet appeared:", obj.Name)
-                    stopHopping = true
+                    stopHopping = false
                     if not webhookSent then
                         sendWebhook({obj.Name}, game.JobId)
                         webhookSent = true
