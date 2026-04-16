@@ -435,5 +435,5 @@ if #petsFound > 0 then
     end
 else
     print("🔍 No target pets found. Hopping to next server...")
-    task.delay(1.5, serverHop)
+    task.delay(3, serverHop)
 end
