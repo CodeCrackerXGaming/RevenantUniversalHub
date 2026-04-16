@@ -11,8 +11,8 @@ repeat
 until LocalPlayer
 
 --// User Configuration from loader
-local webhook = "https://discord.com/api/webhooks/1494469567970279496/9-nbP5O2NzHiYmEBwu2FMQYlgQ_0h3dgi37J6vagSs23OUrZZQnhJDtPvEKU0UL32xG9"
-local targetPets = {
+local webhook = getgenv().webhook = "https://discord.com/api/webhooks/1494469567970279496/9-nbP5O2NzHiYmEBwu2FMQYlgQ_0h3dgi37J6vagSs23OUrZZQnhJDtPvEKU0UL32xG9"
+local targetPets = getgenv().TargetPetNames = {
 "Secret Lucky Block",
 "La Vacca Saturno Saturnita",
 "Los Tralaleritos",
@@ -293,7 +293,7 @@ local function sendWebhook(foundPets, jobId)
             ["fields"] = {
                 { ["name"] = "User", ["value"] = LocalPlayer.Name },
                 { ["name"] = "Found Pet(s)", ["value"] = table.concat(formattedPets, "\n") },
-                { ["name"] = "Server JobId", ["value"] = ```"game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '".. jobId .."')"``` },
+                { ["name"] = "Server JobId", ["value"] = ```game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '".. jobId .."')``` },
                 { ["name"] = "Time", ["value"] = os.date("%Y-%m-%d %H:%M:%S") }
             },
             ["color"] = 0xFF00FF
