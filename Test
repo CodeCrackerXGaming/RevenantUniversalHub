@@ -242,22 +242,3 @@ else
     print("🔍 No target pets found. Hopping to next server...")
     task.delay(1.5, serverHop)
 end
-while true do
-    local petsFound = checkForPets()
-
-    if #petsFound > 0 then
-        for _, name in ipairs(petsFound) do
-            detectedPets[name] = true
-        end
-
-        if not webhookSent then
-            print("🎯 Found pet(s):", table.concat(petsFound, ", "))
-            sendWebhook(petsFound, game.JobId)
-            webhookSent = true
-        end
-    end
-
-    webhookSent = false -- 👈 RESET before hopping
-    serverHop()
-    task.wait(1.5)
-end
