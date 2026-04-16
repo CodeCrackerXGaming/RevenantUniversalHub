@@ -72,7 +72,7 @@ function module:Teleport(placeId)
 			end
 		end)
 
-		task.wait(4) -- server hop every 4 seconds
+		task.wait(10) -- server hop every 4 seconds
 	end
 end
 
