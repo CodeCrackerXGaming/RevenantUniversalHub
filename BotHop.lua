@@ -58,7 +58,7 @@ local function addESP(targetModel)
     Billboard.Adornee = targetModel
     Billboard.Size = UDim2.new(0, 100, 0, 30)
     Billboard.StudsOffset = Vector3.new(0, 3, 0)
-    Billboard.AlwaysOnTop = false
+    Billboard.AlwaysOnTop = true
     Billboard.Parent = targetModel
 
     local Label = Instance.new("TextLabel")
@@ -68,7 +68,7 @@ local function addESP(targetModel)
     Label.TextColor3 = Color3.fromRGB(255, 0, 0)
     Label.TextStrokeTransparency = 0.5
     Label.Font = Enum.Font.SourceSansBold
-    Label.TextScaled = false
+    Label.TextScaled = true
     Label.Parent = Billboard
 end
 
