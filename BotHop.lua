@@ -51,34 +51,14 @@ TeleportService.TeleportInitFailed:Connect(function(_, result)
 end)
 
 --// ESP Function
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-
--- SETTINGS
-local SCAN_INTERVAL = 1 -- seconds between scans
-
--- Check if model is a player
-local function isPlayerModel(model)
-    return Players:GetPlayerFromCharacter(model) ~= nil
-end
-
--- Create ESP
 local function addESP(targetModel)
-    -- Ignore players
-    if isPlayerModel(targetModel) then return end
-
-    -- Prevent duplicates
     if targetModel:FindFirstChild("PetESP") then return end
-
-    -- Optional: only apply to models (extra safety)
-    if not targetModel:IsA("Model") then return end
-
     local Billboard = Instance.new("BillboardGui")
     Billboard.Name = "PetESP"
     Billboard.Adornee = targetModel
     Billboard.Size = UDim2.new(0, 100, 0, 30)
     Billboard.StudsOffset = Vector3.new(0, 3, 0)
-    Billboard.AlwaysOnTop = true
+    Billboard.AlwaysOnTop = false
     Billboard.Parent = targetModel
 
     local Label = Instance.new("TextLabel")
@@ -88,7 +68,7 @@ local function addESP(targetModel)
     Label.TextColor3 = Color3.fromRGB(255, 0, 0)
     Label.TextStrokeTransparency = 0.5
     Label.Font = Enum.Font.SourceSansBold
-    Label.TextScaled = true
+    Label.TextScaled = false
     Label.Parent = Billboard
 end
 
