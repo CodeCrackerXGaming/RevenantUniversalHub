@@ -51,8 +51,18 @@ TeleportService.TeleportInitFailed:Connect(function(_, result)
 end)
 
 --// ESP Function
+local Players = game:GetService("Players")
+
+local function isPlayerModel(model)
+    return Players:GetPlayerFromCharacter(model) ~= nil
+end
+
 local function addESP(targetModel)
+    -- 🚫 Skip players
+    if isPlayerModel(targetModel) then return end
+
     if targetModel:FindFirstChild("PetESP") then return end
+
     local Billboard = Instance.new("BillboardGui")
     Billboard.Name = "PetESP"
     Billboard.Adornee = targetModel
