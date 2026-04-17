@@ -51,8 +51,23 @@ TeleportService.TeleportInitFailed:Connect(function(_, result)
 end)
 
 --// ESP Function
+local Players = game:GetService("Players")
+
+-- Check if model is a player
+local function isPlayerModel(model)
+    return Players:GetPlayerFromCharacter(model) ~= nil
+end
+
+-- Create ESP
 local function addESP(targetModel)
+    if not targetModel:IsA("Model") then return end
+
+    -- Ignore players
+    if isPlayerModel(targetModel) then return end
+
+    -- Prevent duplicates
     if targetModel:FindFirstChild("PetESP") then return end
+
     local Billboard = Instance.new("BillboardGui")
     Billboard.Name = "PetESP"
     Billboard.Adornee = targetModel
@@ -72,6 +87,15 @@ local function addESP(targetModel)
     Label.Parent = Billboard
 end
 
+-- Apply to existing models ONCE
+for _, obj in ipairs(workspace:GetDescendants()) do
+    addESP(obj)
+end
+
+-- Only detect NEW models (no loop)
+workspace.DescendantAdded:Connect(function(obj)
+    addESP(obj)
+end)
 -- Scan function
 local function scanWorkspace()
     for _, obj in ipairs(workspace:GetDescendants()) do
