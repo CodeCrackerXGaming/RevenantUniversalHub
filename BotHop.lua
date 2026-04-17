@@ -92,10 +92,10 @@ local function sendWebhook(foundPets, jobId)
     end
 
     local jsonData = HttpService:JSONEncode({
-    ["content"] = "@here 🚨 SECRET PET DETECTED!",
+    ["content"] = "@here 🚨 SECRET BRAINROT DETECTED!",
     ["embeds"] = {{
         ["title"] = "🧠 Pet(s) Found!",
-        ["description"] = "Brainrot-worthy pet detected in the server!",
+        ["description"] = "Brainrot Founded in the server!",
         ["fields"] = {
             { ["name"] = "User", ["value"] = LocalPlayer.Name },
             { ["name"] = "Found Pet(s)", ["value"] = table.concat(formattedPets, "\n") },
