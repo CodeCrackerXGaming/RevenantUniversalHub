@@ -52,16 +52,26 @@ end)
 
 --// ESP Function
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 
+-- SETTINGS
+local SCAN_INTERVAL = 1 -- seconds between scans
+
+-- Check if model is a player
 local function isPlayerModel(model)
     return Players:GetPlayerFromCharacter(model) ~= nil
 end
 
+-- Create ESP
 local function addESP(targetModel)
-    -- 🚫 Skip players
+    -- Ignore players
     if isPlayerModel(targetModel) then return end
 
+    -- Prevent duplicates
     if targetModel:FindFirstChild("PetESP") then return end
+
+    -- Optional: only apply to models (extra safety)
+    if not targetModel:IsA("Model") then return end
 
     local Billboard = Instance.new("BillboardGui")
     Billboard.Name = "PetESP"
@@ -81,6 +91,30 @@ local function addESP(targetModel)
     Label.TextScaled = true
     Label.Parent = Billboard
 end
+
+-- Scan function
+local function scanWorkspace()
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        if obj:IsA("Model") then
+            addESP(obj)
+        end
+    end
+end
+
+-- Auto scan loop
+task.spawn(function()
+    while true do
+        scanWorkspace()
+        task.wait(SCAN_INTERVAL)
+    end
+end)
+
+-- Detect newly added models instantly (faster than scanning)
+workspace.DescendantAdded:Connect(function(obj)
+    if obj:IsA("Model") then
+        addESP(obj)
+    end
+end)
 
 --// Webhook Function
 local function sendWebhook(foundPets, jobId)
