@@ -286,24 +286,24 @@ local function sendWebhook(foundPets, jobId)
     end
 
     local jsonData = HttpService:JSONEncode({
-        ["content"] = "@here 🚨 SECRET PET DETECTED!",
-        ["embeds"] = {{
-            ["title"] = "🧠 Pet(s) Found!",
-            ["description"] = "Brainrot-worthy pet detected in the server!",
-            ["fields"] = {
-                { ["name"] = "User", ["value"] = LocalPlayer.Name },
-                { ["name"] = "Found Pet(s)", ["value"] = table.concat(formattedPets, "\n") },
-                {
-    ["name"] = "Server JobId",
-    ["value"] = "game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '" 
-        .. jobId .. 
-        "')"
-},
-                { ["name"] = "Time", ["value"] = os.date("%Y-%m-%d %H:%M:%S") }
-            },
-            ["color"] = 0xFF00FF
-        }}
-    })
+    ["content"] = "@here 🚨 SECRET PET DETECTED!",
+    ["embeds"] = {{
+        ["title"] = "🧠 Pet(s) Found!",
+        ["description"] = "Brainrot-worthy pet detected in the server!",
+        ["fields"] = {
+            { ["name"] = "User", ["value"] = LocalPlayer.Name },
+            { ["name"] = "Found Pet(s)", ["value"] = table.concat(formattedPets, "\n") },
+            { ["name"] = "Server JobId", ["value"] = jobId },
+            { ["name"] = "Time", ["value"] = os.date("%Y-%m-%d %H:%M:%S") },
+
+            { 
+                ["name"] = "Teleport Command",
+                ["value"] = "```game:GetService('TeleportService'):TeleportToPlaceInstance(109983668079237, '" .. jobId .. "')```"
+            }
+        },
+        ["color"] = 0xFF00FF
+    }}
+})
 
     local req = http_request or request or syn and syn.request
     if req then
@@ -440,5 +440,5 @@ if #petsFound > 0 then
     end
 else
     print("🔍 No target pets found. Hopping to next server...")
-    task.delay(3, serverHop)
+    task.delay(1.5, serverHop)
 end
